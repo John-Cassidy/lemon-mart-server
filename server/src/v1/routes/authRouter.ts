@@ -1,14 +1,14 @@
-import { Request, Response, Router } from 'express'
+import { Request, Response, Router } from 'express';
 
-import { UserCollection } from '../../models/user'
+import { UserCollection } from '../../models/user';
 import {
   AuthenticationRequiredMessage,
   IncorrectEmailPasswordMessage,
   authenticate,
   createJwt,
-} from '../../services/authService'
+} from '../../services/authService';
 
-const router = Router()
+const router = Router();
 
 /**
  * @swagger
@@ -46,15 +46,15 @@ const router = Router()
  *         $ref: '#/components/responses/UnauthorizedError'
  */
 router.post('/login', async (req: Request, res: Response) => {
-  const userEmail = req.body.email?.toLowerCase()
-  const user = await UserCollection.findOne({ email: userEmail })
+  const userEmail = req.body.email?.toLowerCase();
+  const user = await UserCollection.findOne({ email: userEmail });
 
   if (user && (await user.comparePassword(req.body.password))) {
-    return res.send({ accessToken: await createJwt(user) })
+    return res.send({ accessToken: await createJwt(user) });
   }
 
-  return res.status(401).send({ message: IncorrectEmailPasswordMessage })
-})
+  return res.status(401).send({ message: IncorrectEmailPasswordMessage });
+});
 
 /**
  * @swagger
@@ -76,10 +76,10 @@ router.post('/login', async (req: Request, res: Response) => {
 // tslint:disable-next-line: variable-name
 router.get('/me', authenticate(), async (_req: Request, res: Response) => {
   if (res.locals.currentUser) {
-    return res.send(res.locals.currentUser)
+    return res.send(res.locals.currentUser);
   }
 
-  return res.status(401).send({ message: AuthenticationRequiredMessage })
-})
+  return res.status(401).send({ message: AuthenticationRequiredMessage });
+});
 
-export default router
+export default router;

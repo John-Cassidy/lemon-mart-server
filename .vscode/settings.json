@@ -3,7 +3,7 @@
 
   "editor.tabSize": 2,
   "editor.rulers": [90],
-  "editor.autoIndent": true,
+  "editor.autoIndent": "full",
   "editor.cursorBlinking": "solid",
   "editor.formatOnType": false,
   "editor.formatOnPaste": false,
@@ -11,7 +11,7 @@
   "editor.minimap.enabled": false,
   "editor.codeActionsOnSave": {
     "source.organizeImports": false,
-    "source.fixAll.tslint": true,
+    "source.fixAll.tslint": true
   },
 
   "explorer.openEditors.visible": 0,
@@ -37,7 +37,7 @@
   "workbench.iconTheme": "material-icon-theme",
 
   "auto-close-tag.SublimeText3Mode": true,
-  "html.autoClosingTags": false,
+  "html.autoClosingTags": true,
 
   "peacock.affectActivityBar": true,
   "peacock.affectStatusBar": true,

@@ -1,7 +1,7 @@
-import * as swaggerJsdoc from 'swagger-jsdoc'
-import { Options } from 'swagger-jsdoc'
+import * as swaggerJsdoc from 'swagger-jsdoc';
+import { Options } from 'swagger-jsdoc';
 
-import * as packageJson from '../package.json'
+import * as packageJson from '../package.json';
 
 const options: Options = {
   swaggerDefinition: {
@@ -28,6 +28,6 @@ const options: Options = {
     ],
   },
   apis: ['**/models/*.js', '**/v1/routes/*.js', '**/v2/routes/*.js'],
-}
+};
 
-export const specs = swaggerJsdoc(options)
+export const specs = swaggerJsdoc(options);

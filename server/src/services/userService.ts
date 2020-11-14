@@ -1,13 +1,13 @@
-import { PhoneType, Role } from '../models/enums'
-import { IUser, User, UserCollection } from '../models/user'
+import { PhoneType, Role } from '../models/enums';
+import { IUser, User, UserCollection } from '../models/user';
 
 export async function createNewUser(userData: IUser): Promise<User | boolean> {
-  const user = new User(userData)
-  const success = await user.save()
+  const user = new User(userData);
+  const success = await user.save();
   if (success) {
-    return user
+    return user;
   } else {
-    return false
+    return false;
   }
 }
 
@@ -15,11 +15,11 @@ export async function initializeDemoUser(email: string, password: string, id: st
   // This function loads a demo user.
   // In a production application you would seed admin users in a similar way (except for the user id).
 
-  const existingUser = await UserCollection.findOne({ email })
+  const existingUser = await UserCollection.findOne({ email });
 
   if (existingUser) {
-    console.log('Found existing user... deleting')
-    await existingUser.delete()
+    console.log('Found existing user... deleting');
+    await existingUser.delete();
   }
 
   const defaultUser = new User({
@@ -42,7 +42,7 @@ export async function initializeDemoUser(email: string, password: string, id: st
         digits: '5555550717',
       },
     ],
-  })
+  });
 
-  await defaultUser.create(id, password, true)
+  await defaultUser.create(id, password, true);
 }

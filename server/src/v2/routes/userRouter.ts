@@ -1,13 +1,13 @@
-import { IQueryParameters } from 'document-ts'
-import { Request, Response, Router } from 'express'
-import { ObjectID } from 'mongodb'
+import { IQueryParameters } from 'document-ts';
+import { Request, Response, Router } from 'express';
+import { ObjectID } from 'mongodb';
 
-import { Role } from '../../models/enums'
-import { IUser, User, UserCollection } from '../../models/user'
-import { authenticate } from '../../services/authService'
-import { createNewUser } from '../../services/userService'
+import { Role } from '../../models/enums';
+import { IUser, User, UserCollection } from '../../models/user';
+import { authenticate } from '../../services/authService';
+import { createNewUser } from '../../services/userService';
 
-const router = Router()
+const router = Router();
 
 /**
  * @swagger
@@ -96,12 +96,12 @@ router.get(
       skip: req.query.skip,
       sortKeyOrList: req.query.sortKey,
       projectionKeyOrList: ['email', 'role', '_id', 'name'],
-    }
+    };
 
-    const users = await UserCollection.findWithPagination<User>(query)
-    res.send(users)
+    const users = await UserCollection.findWithPagination<User>(query);
+    res.send(users);
   }
-)
+);
 
 /**
  * @swagger
@@ -126,15 +126,15 @@ router.post(
   '/',
   authenticate({ requiredRole: Role.Manager }),
   async (req: Request, res: Response) => {
-    const userData = req.body as IUser
-    const success = await createNewUser(userData)
+    const userData = req.body as IUser;
+    const success = await createNewUser(userData);
     if (success instanceof User) {
-      res.send(success)
+      res.send(success);
     } else {
-      res.status(400).send({ message: 'Failed to create user.' })
+      res.status(400).send({ message: 'Failed to create user.' });
     }
   }
-)
+);
 
 /**
  * @swagger
@@ -166,14 +166,14 @@ router.get(
     },
   }),
   async (req: Request, res: Response) => {
-    const user = await UserCollection.findOne({ _id: new ObjectID(req.params.userId) })
+    const user = await UserCollection.findOne({ _id: new ObjectID(req.params.userId) });
     if (!user) {
-      res.status(404).send({ message: 'User not found.' })
+      res.status(404).send({ message: 'User not found.' });
     } else {
-      res.send(user)
+      res.send(user);
     }
   }
-)
+);
 
 /**
  * @swagger
@@ -211,23 +211,23 @@ router.put(
     },
   }),
   async (req: Request, res: Response) => {
-    const userData = req.body as User
-    delete userData._id
+    const userData = req.body as User;
+    delete userData._id;
     await UserCollection.findOneAndUpdate(
       { _id: new ObjectID(req.params.userId) },
       {
         $set: userData,
       }
-    )
+    );
 
-    const user = await UserCollection.findOne({ _id: new ObjectID(req.params.userId) })
+    const user = await UserCollection.findOne({ _id: new ObjectID(req.params.userId) });
 
     if (!user) {
-      res.status(404).send({ message: 'User not found.' })
+      res.status(404).send({ message: 'User not found.' });
     } else {
-      res.send(user)
+      res.send(user);
     }
   }
-)
+);
 
-export default router
+export default router;
