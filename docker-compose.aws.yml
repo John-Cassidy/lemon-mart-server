@@ -2,7 +2,7 @@ version: '3'
 services:
   web-app:
     container_name: web
-    image: duluca/lemon-mart-web-app
+    image: jpcassidy/lemon-mart-web-app
     ports:
       - '80:80'
     links:
@@ -12,7 +12,7 @@ services:
 
   server:
     container_name: lemon-mart-server
-    image: duluca/lemon-mart-server
+    image: jpcassidy/lemon-mart-server
     env_file: ./server/.env
     environment:
       - MONGO_URI=mongodb://john.smith:g00fy@lemondb:27017/lemon-mart
@@ -25,7 +25,7 @@ services:
 
   database:
     container_name: lemondb
-    image: duluca/minimal-mongo:4.2.2
+    image: jpcassidy/minimal-mongo:4.2.2
     env_file: .env
     ports:
       - '27017:27017'

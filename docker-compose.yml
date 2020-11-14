@@ -27,7 +27,7 @@ services:
 
   database:
     container_name: lemondb
-    image: duluca/minimal-mongo:4.2.2
+    image: jpcassidy/minimal-mongo:4.2.2
     restart: always
     env_file: .env
     ports:
