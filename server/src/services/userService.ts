@@ -3,7 +3,7 @@ import { IUser, User, UserCollection } from '../models/user';
 
 export async function createNewUser(userData: IUser): Promise<User | boolean> {
   const user = new User(userData);
-  const success = await user.save();
+  const success = await user.createNewUser();
   if (success) {
     return user;
   } else {

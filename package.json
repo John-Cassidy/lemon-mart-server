@@ -22,6 +22,7 @@
     "clean:all": "docker system prune --volumes",
     "start:backend": "docker-compose -f docker-compose.backend.yml up --build",
     "start:database": "docker-compose -f docker-compose.database.yml up --build",
+    "stop:database": "docker-compose -f docker-compose.database.yml down",
     "publish:aws": "cross-conf-env ecs-cli compose --file docker-compose.aws.yml -p $npm_package_name -c $npm_package_config_awsEcsCluster -r $npm_package_config_awsRegion create",
     "start:docker:database": "docker run --env-file .env -d -p '27017:27017' -v '/tmp/lemon-mart-db:/data/db' duluca/minimal-mongo",
     "rimraf:node_modules": "rimraf node_modules && rimraf server/node_modules && rimraf web-app/node_modules",

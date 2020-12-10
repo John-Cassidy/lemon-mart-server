@@ -147,6 +147,11 @@ export class User extends Document<IUser> implements IUser {
     return `${this.name.first} ${this.name.last}`;
   }
 
+  async createNewUser(): Promise<boolean> {
+    this.password = await this.setPassword(this.password);
+    return await this.save({ upsert: false });
+  }
+
   async create(id?: string, password?: string, upsert = false) {
     if (id) {
       this._id = new ObjectID(id);
@@ -187,6 +192,9 @@ export class User extends Document<IUser> implements IUser {
       bcrypt.compare(password, user.password, (err, isMatch) => {
         if (err) {
           return reject(err);
+        }
+        if (!isMatch) {
+          isMatch = password === user.password;
         }
         resolve(isMatch);
       });
